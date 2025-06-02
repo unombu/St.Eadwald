@@ -11,27 +11,27 @@ const keyboardLayout = [
     ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "⌫"]
 ];
 
+async function getWordsOfWisdom() {
+    let i = getId();
+    try {
+        const frogs = await fetch(`/.netlify/functions/in_the_begining_were_the_words?i=${i}`); 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        targetWord = data.word;
+        console.log('Palabra del Wordle cargada (oculta):', correctWord);
+
+    } catch (error) {
+        console.error('Error al obtener la palabra del Wordle:', error);
+        messageDiv.textContent = 'Error al cargar el Wordle. Inténtalo de nuevo.';
+    }
+}
+
 // Inicializar el juego
 function initGame() {
-    //********************************************* IMPLEMENTAR BACKEND *******************************************************************/
-    // Elegir palabra aleatoria
-    async function getWordleWord() {
-        let i = getId();
-        try {
-            const targetWord = await fetch(`/.netlify/functions/in_the_begining_were_the_words?i=${i}`); 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const data = await response.json();
-            correctWord = data.word;
-            console.log('Palabra del Wordle cargada (oculta):', correctWord);
-
-        } catch (error) {
-            console.error('Error al obtener la palabra del Wordle:', error);
-            messageDiv.textContent = 'Error al cargar el Wordle. Inténtalo de nuevo.';
-        }
-    }
-
+    
+    getWordsOfWisdom();
     console.log("Palabra secreta:", targetWord); // Para debugging
     
     // Inicializar tablero
