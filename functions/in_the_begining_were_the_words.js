@@ -4,7 +4,7 @@ exports.handler = async function(event, context) {
         "PLUTO", "MOMMY", "PLEASE"
     ];
 
-    let index = event.queryStringParameters.index;
+    let index = event.queryStringParameters.i;
 
     let word = WORDS[index];
 
