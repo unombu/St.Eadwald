@@ -1,7 +1,7 @@
 exports.handler = async function(event, context) {
     const WORDS = [
         "LINDO", "CUTIE", "TALOS", "SONIC", "ALIEN", "BESOS", "CALVO", "VERDE", "JUEGO",
-        "PLUTO", "MOMMY", "PLEASE"
+        "PLUTO", "MOMMY", "PLEASE", "SILLA"
     ];
 
     let index = event.queryStringParameters.i;
