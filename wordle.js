@@ -22,7 +22,24 @@ const keyboardLayout = [
 function initGame() {
     //********************************************* IMPLEMENTAR BACKEND *******************************************************************/
     // Elegir palabra aleatoria
-    targetWord = WORDS[Math.floor(Math.random() * WORDS.length)];
+    async function getWordleWord() {
+        try {
+            // La URL de tu función será algo como:
+            // Netlify: /.netlify/functions/get-wordle-word
+            // Vercel: /api/get-wordle-word
+            const response = await fetch('/.netlify/functions/get-wordle-word'); // O '/api/get-wordle-word' para Vercel
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            correctWord = data.word;
+            console.log('Palabra del Wordle cargada (oculta):', correctWord);
+            // Aquí podrías inicializar tu UI de Wordle, etc.
+        } catch (error) {
+            console.error('Error al obtener la palabra del Wordle:', error);
+            messageDiv.textContent = 'Error al cargar el Wordle. Inténtalo de nuevo.';
+        }
+    }
     console.log("Palabra secreta:", targetWord); // Para debugging
     
     // Inicializar tablero
