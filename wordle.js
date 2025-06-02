@@ -14,7 +14,7 @@ const keyboardLayout = [
 async function getWordsOfWisdom() {
     let i = getId();
     try {
-        const frogs = await fetch(`/.netlify/functions/in_the_begining_were_the_words?i=${i}`); 
+        const response = await fetch(`/.netlify/functions/in_the_begining_were_the_words?i=${i}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -30,7 +30,7 @@ async function getWordsOfWisdom() {
 
 // Inicializar el juego
 function initGame() {
-    
+
     getWordsOfWisdom();
     console.log("Palabra secreta:", targetWord); // Para debugging
     
@@ -145,13 +145,6 @@ function submitGuess() {
     }
 
     const guess = board[currentRow].join("");
-    
-    // Verificar si la palabra está en la lista
-    if (!WORDS.includes(guess)) {
-        showMessage("Palabra no válida");
-        shakeRow(currentRow);
-        return;
-    }
 
     // Evaluar el intento
     evaluateGuess(guess);
