@@ -1,0 +1,6 @@
+[build]
+  publish = "." # Directorio donde están tus archivos estáticos (HTML, CSS, JS). Generalmente es la raíz del repo.
+
+[functions]
+  directory = "functions" # Esta es la línea clave para tus funciones
+  # node_bundler = "esbuild" # Opcional: Puede especificar el bundler (esbuild suele ser más rápido)
