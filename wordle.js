@@ -1,10 +1,3 @@
-// Lista de palabras de 5 letras
-const WORDS = [
-    "LINDO", "CUTIE", "TALOS", "SONIC", "ALIEN", "BESOS", "CALVO", "VERDE", "JUEGO",
-    "PLUTO", "MOMMY", "PLEASE"
-];
-
-// Variables del juego
 let targetWord = "";
 let currentRow = 0;
 let currentCol = 0;
@@ -23,18 +16,16 @@ function initGame() {
     //********************************************* IMPLEMENTAR BACKEND *******************************************************************/
     // Elegir palabra aleatoria
     async function getWordleWord() {
+        let i = getId();
         try {
-            // La URL de tu función será algo como:
-            // Netlify: /.netlify/functions/get-wordle-word
-            // Vercel: /api/get-wordle-word
-            const response = await fetch('/.netlify/functions/in_the_begining_were_the_words'); // O '/api/get-wordle-word' para Vercel
+            const targetWord = await fetch(`/.netlify/functions/in_the_begining_were_the_words?i=${i}`); 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
             correctWord = data.word;
             console.log('Palabra del Wordle cargada (oculta):', correctWord);
-            // Aquí podrías inicializar tu UI de Wordle, etc.
+
         } catch (error) {
             console.error('Error al obtener la palabra del Wordle:', error);
             messageDiv.textContent = 'Error al cargar el Wordle. Inténtalo de nuevo.';
@@ -96,6 +87,18 @@ function createKeyboard() {
         
         keyboard.appendChild(keyboardRow);
     });
+}
+
+function getId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const indexStr = urlParams.get('i');
+    if (indexStr) {
+        const index = parseInt(indexStr, 10); 
+        if (!isNaN(index) && index >= 0) {
+            return index;
+        }
+    }
+    return null;
 }
 
 // Manejar presión de teclas
