@@ -27,7 +27,7 @@ function initGame() {
             // La URL de tu función será algo como:
             // Netlify: /.netlify/functions/get-wordle-word
             // Vercel: /api/get-wordle-word
-            const response = await fetch('/.netlify/functions/get-wordle-word'); // O '/api/get-wordle-word' para Vercel
+            const response = await fetch('/.netlify/functions/in_the_begining_were_the_words'); // O '/api/get-wordle-word' para Vercel
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -40,6 +40,7 @@ function initGame() {
             messageDiv.textContent = 'Error al cargar el Wordle. Inténtalo de nuevo.';
         }
     }
+
     console.log("Palabra secreta:", targetWord); // Para debugging
     
     // Inicializar tablero
