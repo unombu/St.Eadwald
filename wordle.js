@@ -20,7 +20,7 @@ async function getWordsOfWisdom() {
         }
         const data = await response.json();
         targetWord = data.word;
-        console.log('Palabra del Wordle cargada (oculta):', correctWord);
+        console.log('Palabra del Wordle cargada (oculta):', targetWord);
 
     } catch (error) {
         console.error('Error al obtener la palabra del Wordle:', error);
