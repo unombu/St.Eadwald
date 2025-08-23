@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
         9 : {word : "PLUTO"},
         10 : {word : "MOMMY"},
         11 : {word : "DADDY"},
-        12 : {word : "SILLA"}
+        66 : {word : "SILLA"}
     };
 
     let index = event.queryStringParameters.i;
